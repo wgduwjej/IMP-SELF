@@ -3,7 +3,7 @@
 <br>
 <div align="center">
 </p>
-Ya gw cuma gabut doang sih hehe
+Bukan programmer bukan kang codingcuma orang biasa yang ingin menjadi orang yang berguna
 </p>
 </div>
 <br>
@@ -27,7 +27,7 @@ Ya gw cuma gabut doang sih hehe
 <br>
 </p>
 <h2 align="center">SCROLL KE BAWAH UNTUK CARA INSTALL</h2>
-<p align="center"><a href="https://github.com/wgduwjej/Bot-wa"></p>
+<p align="center"><a href="https://github.com/wgduwjej/IMP-SELF"></p>
 </div>
 
 ## CARA INSTALL DI TERMUX
@@ -44,7 +44,7 @@ Ya gw cuma gabut doang sih hehe
 
 > pkg install git
 
-> git clone https://github.com/wgduwjej/Bot-wa
+> git clone https://github.com/wgduwjej/IMP-SELF
 
 > termux-setup-storage
 
