@@ -943,7 +943,6 @@ await denz.updatePresence(from, Presence.composing)
         uwu = '```'
        stst = await denz.getStatus(`${sender.split('@')[0]}@c.us`)
 				stst = stst.status == 401 ? '' : stst.status
-			num = await fetchJson(`https://api.telnyx.com/anonymous/v2/number_lookup/${senderNumber}`, {method: 'get'})
        menu = `*Halo ${pushname}*
 *Kalo buttonnya gak ada*
 *ketik #allmenu*
@@ -970,7 +969,6 @@ case 'allmenu':
         uwu = '```'
        stst = await denz.getStatus(`${sender.split('@')[0]}@c.us`)
 				stst = stst.status == 401 ? '' : stst.status
-			num = await fetchJson(`https://api.telnyx.com/anonymous/v2/number_lookup/${senderNumber}`, {method: 'get'})
 menu = `${uwu}
 ╭─❒ 「 Bot Info 」 ❒
 │◦➛Creator : @${ptod.split('@')[0]}
