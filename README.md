@@ -3,7 +3,8 @@
 <br>
 <div align="center">
 </p>
-Bukan programmer bukan kang codingcuma orang biasa yang ingin menjadi orang yang berguna
+Bukan programmer bukan kang coding 
+cuma orang biasa yang ingin menjadi orang yang berguna
 </p>
 </div>
 <br>
