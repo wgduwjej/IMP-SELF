@@ -1,7 +1,7 @@
 {
-  "name": "I'M BOOST",
+  "name": "im-boost",
   "version": "0.0.1",
-  "description": "IMP-XBOT",
+  "description": "sslfbot",
   "main": "node index",
   "directories": {
     "lib": "lib"
