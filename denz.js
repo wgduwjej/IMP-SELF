@@ -1270,8 +1270,7 @@ case 'listmenu':
  buttonText: 'LIST MENU',
  footerText: '*_© IMP-XBOT_*',
  description: `Hai kak ${pushname}, Silahkan pilih menu disini`,
- description: `> ⬡Creator : @${ptod.split('@')[0]}
-> ⬡Battery : ${baterai.battery}
+ description: `> ⬡Battery : ${baterai.battery}
 > ⬡Mode : ${publik ? 'Public' : 'Self'}
 > ⬡Total Hit : ${cmhit.length}
 > ⬡Prefix : ${multi ? 'Multi Prefix' : 'No Prefix'}`,
@@ -2067,6 +2066,28 @@ reply('Oke')
 client.close()
 }
 break
+                  case 'tinyurl':
+try {
+link = args[0]
+anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`)
+reply(`${anu.data}`)
+} catch (e) {
+emror = String(e)
+reply(`${e}`)
+}
+break
+    case 'tomp4':
+            if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
+            ger = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+            owgi = await denz.downloadAndSaveMediaMessage(ger)
+            webp2mp4File(owgi).then(res=>{
+            sendMediaURL(from,res.result,'Done')
+            })
+            }else {
+            reply('reply stiker')
+            }
+            fs.unlinkSync(owgi)
+            break
 case 'culik':
 if (!isOwner && !mek.key.fromMe) return reply(mess.only.ownerB)
 if (args.length < 1) return reply('_*Masukin id grupnya tolol*_')
@@ -2130,7 +2151,7 @@ break
 				case 'sc':
 		case 'script':
 		case 'sourcecode':
-		denz.sendMessage(from, { text: "https://youtube.com/channel/UCtfZkYbSn5kyTcpEhHG7yQw", matchedText: 'https://youtube.com/channel/UCtfZkYbSn5kyTcpEhHG7yQw', description: "", title: "don't click here !!!", jpegThumbnail: ofrply }, 'extendedTextMessage', { detectLinks: false, contextInfo: { forwardingScore: 508, isForwarded: true}, quoted: finv})
+		denz.sendMessage(from, { text: "https://tinyurl.com/yg4k8bvg", matchedText: 'https://tinyurl.com/yg4k8bvg', description: "", title: "don't click here !!!", jpegThumbnail: ofrply }, 'extendedTextMessage', { detectLinks: false, contextInfo: { forwardingScore: 508, isForwarded: true}, quoted: finv})
 		break
 case 'ig':
 case 'igdl':
@@ -2771,16 +2792,6 @@ encmediam = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.exten
 						reply('1 untuk mengaktifkan, 0 untuk mematikan')
 					}
 					break
-				case 'tinyurl':
-try {
-link = args[0]
-anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`)
-reply(`${anu.data}`)
-} catch (e) {
-emror = String(e)
-reply(`${e}`)
-}
-break
 case 'sharelock':
 kntl = `${args.join(' ')}`
 nama = kntl.split("|")[0];
@@ -3892,25 +3903,36 @@ break
 							reply(mess.error.api)
 						}
 						break
-                    case 'play':
-                            if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
-                            const playy = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
-                            const mulaikah = playy.data.result[0].url
-                            try {
-                                reply(mess.wait)
-                                yta(mulaikah)
-                                .then((res) => {
-                                    const { dl_link, thumb, title, filesizeF, filesize } = res
-                                    axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-                                    .then(async (a) => {
-                                    if (Number(filesize) >= 30000) return sendMediaURL(from, thumb, `❏ *PLAYmp3*\n\n❏ *Title* : ${title}\n❏ *Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Maaf durasi melebihi batas maksimal, Silahkan klik link diatas_`)
-                                    sendFileFromUrl(dl_link, document, {mimetype: 'audio/mp3', filename: `${title}.mp3`, quoted: mek, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title:title,body:"",mediaType:"2",thumbnail:getBuffer(thumb),mediaUrl:`${body.slice(7)}`}}}).catch(() => reply(mess.error.api))
-                                    })
-                                })
-                            } catch (err) {
-                                reply(mess.error.api)
-                            }
-                            break
+                                          case "play":
+        if (args.length === 0)
+          return reply(
+            `Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`
+          );
+        var srch = args.join("");
+        aramas = await ytsd(srch);
+        aramat = aramas.all;
+        var mulaikah = aramat[0].url;
+        try {
+          yta(mulaikah).then((res) => {
+            const { dl_link, thumb, title, filesizeF, filesize } = res;
+            axios
+              .get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+              .then(async (a) => {
+                if (Number(filesize) >= 100000)
+                  return sendMediaURL(
+                    from,
+                    thumb,
+                    `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`
+                  );
+                const captions = `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`;
+                sendMediaURL(from, thumb, captions);
+                await sendMediaURL(from, dl_link).catch(() => reply("error"));
+              });
+          });
+        } catch (err) {
+          reply(mess.error.api);
+        }
+        break;
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
                             const playi = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
